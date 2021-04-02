@@ -1,3 +1,6 @@
+// đọc thấy thiếu chức năng j thì ns t để t suy nghĩ đặt nó ở đâu
+// ns chung này là cơ bản rồi, add từng chức năng vào như là đọc file csv rồi đọc dữ liệu từ data nữa là xong
+// các phần create coi như là ổn
 #include <conio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -37,6 +40,10 @@ void createClasses(int year)
     }
     fout << "0";
     fout.close();
+    // sau chỗ này sẽ tạo các folder student
+    // vd sv Trương Đức Thắng sẽ có folder là Trương Đức Thắng hay folder mssv j đó
+    // trong đó chứa file info.txt và file scoreboard
+    // Và tạo thêm file scoreBoard chung cho cả lớp nữa
 }
 
 vector<string> importLastYear(int year)
@@ -57,6 +64,27 @@ vector<string> importLastYear(int year)
     } while (classes != "0");
     fout.close();
     return lastYear;
+}
+createCourse(int year, int semester)
+{
+    string schoolYear = to_string(year) + "-" + to_string(year + 1);
+    ifstream fin;
+    ofstream fout;
+    fout.open(schoolYear + "/semester" + to_string(semester) + "/courses.txt");
+    string s;
+    do
+    {
+        cin >> s;
+        if (s != "0")
+        {
+            fout << s;
+        }
+
+    } while (s != "0");
+    fout.close();
+    //sau chỗ này tạo các file course.txt
+    // vd như là có môn calculas 2 thì sẽ ra file calculas 2.txt
+    // và trong file đó sẽ chứa các thông tin của môn học đó
 }
 createSemester(int year)
 {
