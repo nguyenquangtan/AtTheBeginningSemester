@@ -52,7 +52,7 @@ vector<string> importLastYear(int year)
     ofstream fout;
     string lastSchoolYear = to_string(year - 1) + "-" + to_string(year);
     vector<string> lastYear;
-    fout.open(lastSchoolYear + "/classes" + "/classes.txt");
+    fin.open(lastSchoolYear + "/classes" + "/classes.txt");
     string classes;
     do
     {
@@ -62,7 +62,7 @@ vector<string> importLastYear(int year)
             lastYear.push_back(classes);
         }
     } while (classes != "0");
-    fout.close();
+    fin.close();
     return lastYear;
 }
 createCourse(int year, int semester)
@@ -120,10 +120,102 @@ void createSchoolYear(int year)
     createSemester(year);
     createClasses(year);
 }
+bool checkStaffOrStudent(string tk)
+{
+    ifstream fin;
+    ofstream fout;
+    fin.open("User/user.txt");
+    string user;
+    bool check;
+    while (true)
+    {
+        fin >> user;
+        fin >> check;
+
+        if (user == tk)
+        {
+            return check;
+            break;
+        }
+    }
+    fin.close();
+}
+void login()
+{
+    ifstream fin;
+    ofstream fout;
+    string tk;
+    cout << "user: ";
+    cin >> tk;
+    string passwordData, passwordUser;
+    while (true)
+    {
+        if (checkStaffOrStudent(tk) == 1)
+        {
+            cout << "staff" << endl;
+            fin.open("User/staff/" + tk + "/" + tk + ".txt");
+        }
+        else if (checkStaffOrStudent(tk) == 0)
+        {
+            cout << "student" << endl;
+            fin.open("User/student/" + tk + "/" + tk + ".txt");
+        }
+        fin >> passwordData;
+        cout << "pass: ";
+        cin >> passwordUser;
+        if (passwordData == passwordUser)
+        {
+            cout << "login sucess";
+            break;
+        }
+        fin.close();
+    }
+}
+void signUp()
+{
+    string tk;
+    cin >> tk;
+    string choose;
+    cin >> choose;
+    string password;
+    cin >> password;
+    ifstream fin;
+    ofstream fout;
+    mkdir("User");
+    mkdir("User/staff");
+    mkdir("User/student");
+    string dir;
+    fout.open("User/user.txt");
+    if (choose == "staff")
+    {
+        fout << tk << endl
+             << 1;
+        dir = "User/staff";
+    }
+    else if (choose == "student")
+    {
+        fout << tk << endl
+             << 0;
+        dir = "User/student";
+    }
+    fout.close();
+    mkdir((dir + "/" + tk).c_str());
+    fout.open(dir + "/" + tk + "/" + tk + ".txt");
+    //hàm mã hóa pass vô chỗ này
+    fout << password;
+    cout << "end";
+    fout.close();
+    fout.open(dir + "/" + tk + "/" + "info.txt");
+    //nhập info sau chỗ này
+    fout << choose;
+    fout.close();
+}
 int main()
 {
     cout << "begin" << endl;
-    int year;
-    cin >> year;
-    createSchoolYear(year);
-}
+    // int year;
+    // cin >> year;
+    // createSchoolYear(year);
+    // signUp();
+    login();
+};
