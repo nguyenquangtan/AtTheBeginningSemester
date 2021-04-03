@@ -140,6 +140,13 @@ bool checkStaffOrStudent(string tk)
     }
     fin.close();
 }
+void parsePass(string &pass)
+{
+    for (int i = 0; i < pass.length(); i++)
+    {
+        pass[i] = char(int(pass[i]) - 123);
+    }
+}
 void login()
 {
     ifstream fin;
@@ -163,6 +170,7 @@ void login()
         fin >> passwordData;
         cout << "pass: ";
         cin >> passwordUser;
+        parsePass(passwordData);
         if (passwordData == passwordUser)
         {
             cout << "login sucess";
@@ -171,13 +179,24 @@ void login()
         fin.close();
     }
 }
+void enPass(string &pass)
+{
+    for (int i = 0; i < pass.length(); i++)
+    {
+        pass[i] = char(int(pass[i]) + 123);
+    }
+}
+
 void signUp()
 {
     string tk;
+    cout << "tk? : ";
     cin >> tk;
     string choose;
+    cout << "staff/student? : ";
     cin >> choose;
     string password;
+    cout << "pass? : ";
     cin >> password;
     ifstream fin;
     ofstream fout;
@@ -201,7 +220,7 @@ void signUp()
     fout.close();
     mkdir((dir + "/" + tk).c_str());
     fout.open(dir + "/" + tk + "/" + tk + ".txt");
-    //hàm mã hóa pass vô chỗ này
+    enPass(password);
     fout << password;
     cout << "end";
     fout.close();
@@ -216,6 +235,6 @@ int main()
     // int year;
     // cin >> year;
     // createSchoolYear(year);
-    // signUp();
-    login();
+    signUp();
+    // login();
 };
