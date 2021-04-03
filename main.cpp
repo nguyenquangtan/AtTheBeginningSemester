@@ -47,46 +47,91 @@ void createClasses(int year)
     // trong đó chứa file info.txt và file scoreboard
     // Và tạo thêm file scoreBoard chung cho cả lớp nữa
 }
+void importInfoCourse()
+{
+}
+void viewListCourse(int year, int semester)
+{
+    ifstream fin;
+    ofstream fout;
+    string schoolYear = to_string(year) + "-" + to_string(year + 1);
+    fin.open(schoolYear + "/semester " + to_string(semester) + "/courses.txt");
+    string s;
+    fin >> s;
+    cout << s;
+    fin.close();
+}
 createCourse(int year, int semester)
 {
     string schoolYear = to_string(year) + "-" + to_string(year + 1);
     ifstream fin;
     ofstream fout;
-    fout.open(schoolYear + "/semester" + to_string(semester) + "/courses.txt");
+    mkdir((schoolYear + "/semester " + to_string(semester) + "/courses").c_str());
     string s;
     do
     {
+        fout.open(schoolYear + "/semester " + to_string(semester) + "/courses.txt", ios::app);
+        cout << "create courses : ";
         cin >> s;
         if (s != "0")
         {
-            fout << s;
+            fout << s << endl;
+            fout.close();
+            fout.open(schoolYear + "/semester " + to_string(semester) + "/courses" + "/" + s + ".txt");
+            importInfoCourse();
+            fout.close();
         }
 
     } while (s != "0");
-    fout.close();
     //sau chỗ này tạo các file course.txt
     // vd như là có môn calculas 2 thì sẽ ra file calculas 2.txt
     // và trong file đó sẽ chứa các thông tin của môn học đó
 }
-createSemester(int year)
+void updateCourse(int year, int semester)
+{
+}
+void deleteCourse(int year, int semester)
+{
+}
+void displayCourse(int year, int semester)
+{
+    cout << "Create/View/Update/Delete" << endl;
+    string s;
+    cin >> s;
+    if (s == "Create")
+    {
+        createCourse(year, semester);
+    }
+    else if (s == "View")
+    {
+        viewListCourse(year, semester);
+    }
+    else if (s == "Delete")
+    {
+        deleteCourse(year, semester);
+    }
+    else if (s == "Update")
+    {
+        updateCourse(year, semester);
+    }
+}
+void createSemester(int year, int semester)
 {
     string schoolYear = to_string(year) + "-" + to_string(year + 1);
-    for (int i = 1; i < 4; i++)
-    {
-        cout << "semester" + to_string(i) << endl;
-        mkdir((schoolYear + "/semester " + to_string(i)).c_str());
-        ifstream fin;
-        ofstream fout;
-        fout.open(schoolYear + "/semester " + to_string(i) + "/info.txt");
-        fout << schoolYear << endl;
-        string s;
-        cout << "start date" << endl;
-        cin >> s;
-        fout << s << endl;
-        cout << "end date" << endl;
-        cin >> s;
-        fout << s << endl;
-    }
+    cout << "semester" + to_string(semester) << endl;
+    mkdir((schoolYear + "/semester " + to_string(semester)).c_str());
+    ifstream fin;
+    ofstream fout;
+    fout.open(schoolYear + "/semester " + to_string(semester) + "/info.txt");
+    fout << schoolYear << endl;
+    string s;
+    cout << "start date" << endl;
+    cin >> s;
+    fout << s << endl;
+    cout << "end date" << endl;
+    cin >> s;
+    fout << s << endl;
+    displayCourse(year, semester);
 }
 // void importListCourses()
 // {
@@ -99,8 +144,21 @@ void createSchoolYear(int year)
 {
     string schoolYear = to_string(year) + "-" + to_string(year + 1);
     mkdir(schoolYear.c_str());
-    createSemester(year);
-    createClasses(year);
+    cout << "Create semester /classes (1/2)" << endl;
+    int s;
+    cin >> s;
+    if (s == 1)
+    {
+        cout << "Create semester (1/2/3): ";
+        int semester;
+        cin >> semester;
+        createSemester(year, semester);
+    }
+    else if (s == 2)
+    {
+        cout << "Create classes: " << endl;
+        createClasses(year);
+    }
 }
 bool checkStaffOrStudent(string tk)
 {
@@ -255,6 +313,17 @@ void displayBegin()
 void displayStaff()
 {
     cout << "Staff" << endl;
+    cout << "Create " << endl;
+    cout << "1. School Year" << endl;
+    int i;
+    cin >> i;
+    if (i == 1)
+    {
+        int year;
+        cout << "Year begin: ";
+        cin >> year;
+        createSchoolYear(year);
+    }
 }
 void displayStudent()
 {
