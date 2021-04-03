@@ -147,13 +147,10 @@ void parsePass(string &pass)
         pass[i] = char(int(pass[i]) - 123);
     }
 }
-void login()
+void login(string tk)
 {
     ifstream fin;
     ofstream fout;
-    string tk;
-    cout << "user: ";
-    cin >> tk;
     string passwordData, passwordUser;
     while (true)
     {
@@ -178,6 +175,7 @@ void login()
         }
         fin.close();
     }
+    return checkStaffOrStudent(tk);
 }
 void enPass(string &pass)
 {
@@ -186,7 +184,37 @@ void enPass(string &pass)
         pass[i] = char(int(pass[i]) + 123);
     }
 }
-
+void changePass(string pass, string tk)
+{
+    ifstream fin;
+    ofstream fout;
+    string dir;
+    if (choose == "staff")
+    {
+        dir = "User/staff";
+    }
+    else if (choose == "student")
+    {
+        dir = "User/student";
+    }
+    fout.open(dir + "/" + tk + "/" + tk + ".txt");
+    enPass(password);
+    fout << password;
+    fout.close();
+    login();
+}
+void viewProfile()
+{
+}
+void createProfile(string dir, string tk, string choose)
+{
+    ifstream fin;
+    ofstream fout;
+    fout.open(dir + "/" + tk + "/" + "info.txt");
+    fout << choose;
+    //nhập info j đó dô cho acc đó
+    fout.close();
+}
 void signUp()
 {
     string tk;
@@ -204,17 +232,17 @@ void signUp()
     mkdir("User/staff");
     mkdir("User/student");
     string dir;
-    fout.open("User/user.txt");
+    fout.open("User/user.txt", ios::app);
     if (choose == "staff")
     {
         fout << tk << endl
-             << 1;
+             << 1 << endl;
         dir = "User/staff";
     }
     else if (choose == "student")
     {
         fout << tk << endl
-             << 0;
+             << 0 << endl;
         dir = "User/student";
     }
     fout.close();
@@ -224,17 +252,66 @@ void signUp()
     fout << password;
     cout << "end";
     fout.close();
-    fout.open(dir + "/" + tk + "/" + "info.txt");
-    //nhập info sau chỗ này
-    fout << choose;
-    fout.close();
+    createProfile(dir, tk, choose);
 }
+void displayBegin()
+{
+    cout << "Login/Sign up" << endl;
+    string s;
+    if (s == "Login")
+    {
+        displayLogin();
+    }
+    else if (s == "Sign up")
+    {
+        displaySignUp();
+    }
+}
+void displayStaff()
+{
+}
+void displayStudent()
+{
+}
+void displayLogin()
+{
+    string tk;
+    cout << "user: ";
+    cin >> tk;
+    login(tk);
+    cout << "View profile/Change Password/Logout/Next" << endl;
+    string s;
+    if (s == "View profile")
+    {
+        viewProfile();
+    }
+    else if (s == "Change Password")
+    {
+        changePass();
+    }
+    else if (s == "Logout")
+    {
+        return;
+    }
+    else if (s == "Next")
+    {
+        if (checkStaffOrStudent(tk))
+        {
+            displayStaff();
+        }
+        else
+        {
+            displayStudent();
+        }
+    }
+}
+
 int main()
 {
     cout << "begin" << endl;
     // int year;
     // cin >> year;
     // createSchoolYear(year);
-    signUp();
-    // login();
+    // signUp();
+    displayBegin();
 };
