@@ -10,6 +10,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 vector<string> importLastYear(int year);
+void displayLogin();
+// void displaySignUp();
 void createClasses(int year)
 {
     string schoolYear = to_string(year) + "-" + to_string(year + 1);
@@ -175,7 +177,6 @@ void login(string tk)
         }
         fin.close();
     }
-    return checkStaffOrStudent(tk);
 }
 void enPass(string &pass)
 {
@@ -184,24 +185,27 @@ void enPass(string &pass)
         pass[i] = char(int(pass[i]) + 123);
     }
 }
-void changePass(string pass, string tk)
+void changePass(string tk)
 {
     ifstream fin;
     ofstream fout;
     string dir;
-    if (choose == "staff")
+    if (checkStaffOrStudent(tk) == 1)
     {
         dir = "User/staff";
     }
-    else if (choose == "student")
+    else if (checkStaffOrStudent(tk) == 0)
     {
         dir = "User/student";
     }
     fout.open(dir + "/" + tk + "/" + tk + ".txt");
+    string password;
+    cout << "pass? : ";
+    cin >> password;
     enPass(password);
     fout << password;
     fout.close();
-    login();
+    displayLogin();
 }
 void viewProfile()
 {
@@ -258,20 +262,23 @@ void displayBegin()
 {
     cout << "Login/Sign up" << endl;
     string s;
+    cin >> s;
     if (s == "Login")
     {
         displayLogin();
     }
     else if (s == "Sign up")
     {
-        displaySignUp();
+        signUp();
     }
 }
 void displayStaff()
 {
+    cout << "Staff" << endl;
 }
 void displayStudent()
 {
+    cout << "Student" << endl;
 }
 void displayLogin()
 {
@@ -279,21 +286,23 @@ void displayLogin()
     cout << "user: ";
     cin >> tk;
     login(tk);
+    cout << endl;
     cout << "View profile/Change Password/Logout/Next" << endl;
-    string s;
-    if (s == "View profile")
+    int s;
+    cin >> s;
+    if (s == 1)
     {
         viewProfile();
     }
-    else if (s == "Change Password")
+    else if (s == 2)
     {
-        changePass();
+        changePass(tk);
     }
-    else if (s == "Logout")
+    else if (s == 3)
     {
         return;
     }
-    else if (s == "Next")
+    else if (s == 4)
     {
         if (checkStaffOrStudent(tk))
         {
