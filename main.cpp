@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <bits/stdc++.h>
 using namespace std;
-vector<string> importLastYear(int year);
+
 void displayLogin();
 // void displaySignUp();
 void createClasses(int year)
@@ -33,39 +33,19 @@ void createClasses(int year)
 
     } while (classes != "0");
     fout.close();
-    vector<string> lastYear = importLastYear(year);
-    fout.open(schoolYear + "/classes" + "/classes.txt");
-    for (int i = 0; i < lastYear.size(); i++)
-    {
-        mkdir((schoolYear + "/classes/" + lastYear[i]).c_str());
-        fout << lastYear[i] << endl;
-    }
-    fout << "0";
-    fout.close();
+    // vector<string> lastYear = importLastYear(year);
+    // fout.open(schoolYear + "/classes" + "/classes.txt");
+    // for (int i = 0; i < lastYear.size(); i++)
+    // {
+    //     mkdir((schoolYear + "/classes/" + lastYear[i]).c_str());
+    //     fout << lastYear[i] << endl;
+    // }
+    // fout << "0";
+    // fout.close();
     // sau chỗ này sẽ tạo các folder student
     // vd sv Trương Đức Thắng sẽ có folder là Trương Đức Thắng hay folder mssv j đó
     // trong đó chứa file info.txt và file scoreboard
     // Và tạo thêm file scoreBoard chung cho cả lớp nữa
-}
-
-vector<string> importLastYear(int year)
-{
-    ifstream fin;
-    ofstream fout;
-    string lastSchoolYear = to_string(year - 1) + "-" + to_string(year);
-    vector<string> lastYear;
-    fin.open(lastSchoolYear + "/classes" + "/classes.txt");
-    string classes;
-    do
-    {
-        fin >> classes;
-        if ((int(classes[0]) * 10 + int(classes[1])) + 4 < year)
-        {
-            lastYear.push_back(classes);
-        }
-    } while (classes != "0");
-    fin.close();
-    return lastYear;
 }
 createCourse(int year, int semester)
 {
@@ -287,7 +267,7 @@ void displayLogin()
     cin >> tk;
     login(tk);
     cout << endl;
-    cout << "View profile/Change Password/Logout/Next" << endl;
+    cout << "View profile/Change Password/Logout/Next (1->4)" << endl;
     int s;
     cin >> s;
     if (s == 1)
