@@ -5,7 +5,6 @@
 #include <direct.h>
 #include <iomanip>
 #include <ios>
-#include <limits>
 using namespace std;
 
 struct schoolYear {
@@ -818,7 +817,7 @@ void addACourse(schoolYear& defaultsc, semester& defaultsmt, courseInfo& newCour
 	cout << "5. Input the maximum number of students in the course\n";
 	cout << "6. Input course session 1\n";
 	cout << "7. Input course session 2\n";
-	cout << "8. Add a course\n";
+	cout << "8. Add\n";
 	cout << "9. Back\n";
 	cout << "Input your option: ";
 	cin >> option;
