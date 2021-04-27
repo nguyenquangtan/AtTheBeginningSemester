@@ -1,0 +1,8 @@
+﻿  course.cpp
+C:\Users\tanng\OneDrive\Máy tính\ProjectCS162\AtTheBeginning\Course\course.cpp(66,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\tanng\OneDrive\Máy tính\ProjectCS162\AtTheBeginning\Course\course.cpp(769,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\tanng\OneDrive\Máy tính\ProjectCS162\AtTheBeginning\Course\course.cpp(781,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\tanng\OneDrive\Máy tính\ProjectCS162\AtTheBeginning\Course\course.cpp(784,20): warning C4018: '<': signed/unsigned mismatch
+  main.cpp
+  Generating Code...
+  Course.vcxproj -> C:\Users\tanng\OneDrive\Máy tính\ProjectCS162\AtTheBeginning\Debug\Course.exe

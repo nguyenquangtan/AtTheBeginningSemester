@@ -1,0 +1,6 @@
+﻿  linkedlist.cpp
+C:\Users\tanng\OneDrive\Máy tính\ProjectCS162\AtTheBeginning\ProjectCS162_6-11\linkedlist.cpp(122,12): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+C:\Users\tanng\OneDrive\Máy tính\ProjectCS162\AtTheBeginning\ProjectCS162_6-11\linkedlist.cpp(124,10): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+C:\Users\tanng\OneDrive\Máy tính\ProjectCS162\AtTheBeginning\ProjectCS162_6-11\linkedlist.cpp(227,12): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+C:\Users\tanng\OneDrive\Máy tính\ProjectCS162\AtTheBeginning\ProjectCS162_6-11\linkedlist.cpp(229,10): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+  ProjectCS162_6-11.vcxproj -> C:\Users\tanng\OneDrive\Máy tính\ProjectCS162\AtTheBeginning\Debug\ProjectCS162_6-11.exe
